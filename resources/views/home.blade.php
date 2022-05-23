@@ -39,19 +39,19 @@
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label for="employeeID">Employee ID *</label>
-                            <input type="text" class="form-control" id="employeeID" placeholder="EM10101" require>
+                            <input type="text" name="empID" class="form-control" id="employeeID" placeholder="EM10101" require>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="firstName">First Name *</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="John" require>
+                            <input type="text" name="firstName" class="form-control" id="firstName" placeholder="John" require>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="lastName">Last Name *</label>
-                            <input type="text" class="form-control" id="lastName" placeholder="Doe" require>
+                            <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Doe" require>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="lastName">Email ID *</label>
-                            <input type="email" class="form-control" id="lastName" placeholder="Doe" require>
+                            <input type="email" name="email" class="form-control" id="lastName" placeholder="Doe" require>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="lastName">Mobile No *</label>
@@ -60,11 +60,11 @@
                         <div class="form-group col-md-4">
                             <label for="lastName">Role type *</label>
                             <!-- <input type ="text" class="form-control" id="lastName" placeholder="Doe"> -->
-                            <select class="form-control" id="sel1">
-                                <option>Employee</option>
-                                <option>Admin</option>
-                                <option>Super Admi</option>
-                                <option>HR Admin</option>
+                            <select class="form-control" name="role" id="sel1">
+                                <option value ="Employee">Employee</option>
+                                <option value ="Admin">Admin</option>
+                                <option value ="Super Admin">Super Admin</option>
+                                <option value ="HR Admin">HR Admin</option>
                             </select>
                         </div>
                     </div>
@@ -111,7 +111,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Add User</button>
+                <button type="button" class="btn btn-primary" id = "createEmployee">Add User</button>
             </div>
         </div>
     </div>
@@ -119,8 +119,8 @@
 <table class="table">
     <thead class="thead-light">
         <tr>
-            <th scope="col">Name</th>
-            <th scope="col"></th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
             <th scope="col">Created Date</th>
             <th scope="col">Role</th>
             <th scope="col">Action</th>
@@ -128,33 +128,22 @@
         </tr>
     </thead>
     <tbody>
+        @foreach ($employees as $employee)
         <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>lalalalal</td>
+            <th scope="row">{{$employee->firstName}}</th>
+            <td>{{$employee->lastName}}</td>
+            <td>{{$employee->created_at}}</td>
+            <td>{{$employee->role}}</td>
             <td><i class="fa fa-edit"></i><i class="fa fa-trash"></i></td>
         </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <td>@mdo</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-            <td>@mdo</td>
-        </tr>
+        @endforeach
     </tbody>
 </table>
 @stop
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script> -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <!-- Popper.JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
     integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
@@ -169,7 +158,24 @@
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
         });
+        $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+        });
+        $("#createEmployee").click(function (e) {
+            e.preventDefault();
+            var empID = $("input[name=empID]").val();
+            var firstName = $("input[name=firstame]").val();
+            var lastName = $("input[name=lastame]").val();
+            var email = $("input[name=email]").val();
+            var role = $("input[name=role]").val();
+            var url = '{{ url('postinsert') }}';
+            console.log("Yippeeee");
+        });
     });
+
+
 </script>
 </body>
 
