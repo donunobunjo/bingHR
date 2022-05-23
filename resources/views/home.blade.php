@@ -51,16 +51,16 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label for="lastName">Email ID *</label>
-                            <input type="email" name="email" class="form-control" id="lastName" placeholder="Doe" require>
+                            <input type="email" name="email" class="form-control" id="lastName" placeholder="john.doe@gmail.com" require>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="lastName">Mobile No *</label>
-                            <input type="tel" class="form-control" id="lastName" placeholder="Doe" require>
+                            <input type="tel" class="form-control" id="lastName" placeholder="08038891740" require>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="lastName">Role type *</label>
                             <!-- <input type ="text" class="form-control" id="lastName" placeholder="Doe"> -->
-                            <select class="form-control" name="role" id="sel1">
+                            <select class="form-control" name="role" id="empRole">
                                 <option value ="Employee">Employee</option>
                                 <option value ="Admin">Admin</option>
                                 <option value ="Super Admin">Super Admin</option>
@@ -166,12 +166,40 @@
         $("#createEmployee").click(function (e) {
             e.preventDefault();
             var empID = $("input[name=empID]").val();
-            var firstName = $("input[name=firstame]").val();
-            var lastName = $("input[name=lastame]").val();
+            var firstName = $("input[name=firstName]").val();
+            var lastName = $("input[name=lastName]").val();
             var email = $("input[name=email]").val();
-            var role = $("input[name=role]").val();
-            var url = '{{ url('postinsert') }}';
-            console.log("Yippeeee");
+            var emprole = document.getElementById("empRole");
+            var role = emprole.options[emprole.selectedIndex].value;
+            var url = '/employee';
+            $.ajax({
+           url:url,
+           method:'POST',
+           data:{
+                  empID:empID, 
+                  firstName:firstName,
+                  lastName:lastName,
+                  email:email,
+                  role:role
+                },
+           success:function(response){
+               console.log(response);
+            //   if(response.success){
+            //     //   alert(response.message) //Message come from controller
+            //     console.log("lalal")
+            //   }else{
+            //       alert("Error done happen")
+            //   }
+           },
+           error:function(error){
+              console.log(error)
+           }
+        });
+            console.log(empID);
+            console.log(firstName);
+            console.log(lastName);
+            console.log(email);
+            console.log(role);
         });
     });
 

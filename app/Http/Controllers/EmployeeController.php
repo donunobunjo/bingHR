@@ -37,14 +37,20 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        $employee = Employee::create($request->all());
-        if(!is_null($employee)) {
-            return response()->json(["status" => "success", "message" => "Success! employee created.", "data" => $employee]);
-       }
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Data inserted successfully'
+            ]
+        );
+    //     $employee = Employee::create($request->all());
+    //     if(!is_null($employee)) {
+    //         return response()->json(["status" => "success", "message" => "Success! employee created.", "data" => $employee]);
+    //    }
 
-       else {
-           return response()->json(["status" => "failed", "message" => "Alert! employee not created"]);
-       }
+    //    else {
+    //        return response()->json(["status" => "failed", "message" => "Alert! employee not created"]);
+    //    }
     }
 
     /**

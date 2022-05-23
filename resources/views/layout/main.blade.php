@@ -387,6 +387,9 @@
                         <i class="fas fa-align-justify"></i>
                     </button>
 
+                    
+
+
                     <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item active">
@@ -408,7 +411,7 @@
                             </li>
                         </ul>
                     </div> -->
-                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
                         <a class="navbar-brand" href="#">Navbar scroll</a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarScroll"
                             aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
@@ -445,7 +448,7 @@
                                 <button class="btn btn-outline-success" type="submit">Search</button>
                             </form>
                         </div>
-                    </nav>
+                    </nav> -->
                 </div>
             </nav>
 
