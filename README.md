@@ -1,10 +1,10 @@
 
 ## Steps to setup the application
 
-- git clone https://github.com/donunobunjo/bingHR.git
-- composer install
-- create a database "binghr_db"
-- php artisan migrate:refresh --seed
+1. git clone https://github.com/donunobunjo/bingHR.git
+2. composer install
+3. create a database "binghr_db"
+4.  php artisan migrate:refresh --seed
 I seeded the employee table with 3 records just to checkout if i am on track things and to populate the landing page.
 
 ## Constraits
